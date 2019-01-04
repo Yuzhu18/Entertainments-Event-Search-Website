@@ -32,6 +32,10 @@ a website used for searching entertainments
 #### Preview
 ![alt text](/Screen-shots/event%20search%20form.png)
 
+#### Responsive Design
+![alt text](/Screen-shots/response.png)
+![alt text](/Screen-shots/responses.png)
+
 #### AutoComplete search input used AngularCLI
 ![alt text](/Screen-shots/Auto-complete%20AngularCLI.png)
 
