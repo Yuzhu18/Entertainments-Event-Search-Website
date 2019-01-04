@@ -3,6 +3,8 @@ a website used for searching entertainments
 
 [Link to the Entertainment Search webiste](http://yuzhu-hw8.us-east-2.elasticbeanstalk.com/)
 
+[Video Demo](https://youtu.be/Ai9JYTwanc8)
+
 ### Angular full-stack website: 
 
 * Express.js: backend framework
@@ -21,4 +23,4 @@ a website used for searching entertainments
 ### Deployed on AWS Elastic Beanstalk
 
 ### Preview
-![alt text](/Screen-shots/event search form)
+![alt text](/Screen-shots/event search form.png)
