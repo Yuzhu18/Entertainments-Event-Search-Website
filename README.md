@@ -20,10 +20,16 @@ a website used for searching entertainments
 * Moment.js: for time conversion [link](http://momentjs.com/) 
 * Angular Google Maps: This makes it easier to use Google Maps in Angular [link](https://angular-maps.com/)
 
+### Based on several APIs: 
+* Ticketmaster API
+* Google Map API
+* Spotify API
+* Songkick API
+* Twitter API
+
 ### Deployed on AWS Elastic Beanstalk 
 
 #### Preview
- <font color=red > red </font>
 ![alt text](/Screen-shots/event%20search%20form.png)
 
 #### AutoComplete search input used AngularCLI
@@ -34,3 +40,24 @@ a website used for searching entertainments
 
 #### When click on specific event "Details Form" displayed
 ![alt text](/Screen-shots/Event%20Details%20Form.png)
+
+#### Venue Ddetail From
+![alt text](/Screen-shots/Venue%20Tab%20/%20Google%20Map.png)
+
+#### When click "Buy teicket" will jump to Ticketmaster website
+![alt text](/Screen-shots/Ticketmaster%20API.png)
+
+#### can preview venue picture
+![alt text](/Screen-shots/Venue%20view.png)
+
+#### upcoming events from, including sort by ascending /desending order according to different name
+![alt text](/Screen-shots/Upcoming%20card.png)
+
+#### user can add events into favorites 
+![alt text](/Screen-shots/Favorite%20part.png)
+
+#### view the favorites form
+![alt text](/Screen-shots/Favorites%20part.png)
+
+
+
