@@ -22,5 +22,8 @@ a website used for searching entertainments
 
 ### Deployed on AWS Elastic Beanstalk
 
-### Preview
-![alt text](/Screen-shots/event search form.png)
+#### Preview
+![alt text](/Screen-shots/event%20search%20form.png)
+
+#### AutoComplete search input used AngularCLI
+![alt text](/Screen-shots/Auto-complete%20AngularCLI.png)
