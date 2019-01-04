@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Angular Material style sheet -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Bootstrap js-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!--my javascript-->
+    <script src="config.js"></script>
+
+    <!--length filter-->
+    <script src="igTruncate.js"></script>
+
+    <!--round progess-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-svg-round-progressbar/0.4.8/roundProgress.min.js"></script>
+
+    <!--Google map-->
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3vy_5SYNS_4mmdb1xTm8XaLmi2JS09vo&callback=initMap">
+    </script>
+
+
+
+    <title>HW8</title>
+
+    <style>
+        body{
+            margin: 0;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        .form-group {
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        #form-container{
+            padding-top: 15px;
+            padding-bottom: 12px;
+            border: 1px solid #c1c1c1;
+            border-radius: 9px;
+        }
+
+        #middle{
+            margin: 0 auto;
+        }
+
+        #rstBtn{
+            padding-top: 25px;
+        }
+
+        .tooltip-inner{
+            background-color: dimgray;
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        #favBtn .fas {
+            color: gold;
+        }
+
+        #favbutton .fas{
+            color: gold;
+        }
+
+        .fa-star{
+            outline: none;
+        }
+
+        #venueTable tbody th {
+            width: 170px;
+        }
+
+        #rightBtn{
+            position: relative;
+            left: 80%;
+        }
+
+        #subVenue{
+            position: relative;
+            top: 46px;
+            height: 84px;
+            left: 37%;
+        }
+
+        #subArtist {
+            position: relative;
+            top: 46px;
+            height: 84px;
+            left: 45%;
+        }
+
+        #map{
+            overflow: visible;
+            position: relative;
+            height: 400px;
+        }
+
+        #showMoreBtn{
+            position: relative;
+            top: 77px;
+            left: 42%;
+            margin: 14px;
+        }
+
+        #showLessBtn{
+            position: relative;
+            top: 70px;
+            margin: 15px;
+            left: 42%;
+        }
+
+        /*fade animation*/
+         .card.ng-scope.ng-enter {
+            transition:0.7s linear all;
+            opacity:0;
+        }
+
+        .card.ng-scope.ng-enter.ng-enter-active {
+            opacity:1;
+        }
+
+        .card.ng-scope.ng-leave {
+            transition:0.7s linear all;
+            opacity:1;
+        }
+        .card.ng-scope.ng-leave.ng-leave-active {
+            opacity:0;
+        }
+
+        .slideRight{
+            position:relative;
+            animation:animateright 1s;
+        }
+
+        @keyframes animateright{
+            from{right:-100%;opacity:1}
+            to{right:0;opacity:1}
+        }
+
+        .slideLeft{
+            position:relative;
+            animation:animateleft 1s;
+        }
+
+        @keyframes animateleft{
+            from{left:-100%;opacity:1}
+            to{left:0;opacity:1}
+        }
+
+        .changeBorder{
+            border-color: red;
+        }
+
+        #teamWarn{
+            width: 800px;
+            position: relative;
+            left: 17%;
+        }
+
+
+
+    </style>
+    
+    <script>
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        // Initialize and add the map
+        function initMap(lat, lng) {
+            //The location of des
+            var des_location = new google.maps.LatLng(
+                parseFloat(lat),
+                parseFloat(lng)
+            );
+
+            // The map, centered at des
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 15, center: des_location});
+            // The marker, positioned at des
+            var marker = new google.maps.Marker({position: des_location, map: map});
+        }
+
+    </script>
+
+</head>
+
+
+
+<body ng-app="myApp" ng-controller = "mainCtrl">
+
+
+
+
+<div class="form-div ">
+    <div class="container bg-light" id="form-container">
+
+        <div class="col-md-9" id="middle">
+
+            <h4 class="text-center" style="padding-bottom: 8px">Entertainment Event Ticket Search</h4>
+
+
+            <form class="form-horizontal bg-light" id="my_form" name="my_form" ng-submit = "getInputLoc(); getCurLoc()">
+
+
+                <div class="form-group row  ">
+                    <label for="my_keyword" class="labels col-md-3">Keyword<span class="star" style="color: red">*<span></label>
+
+                    <div class="col-md-9">
+                        <input type="text" id="my_keyword" name="keyword" class="form-control" ng-model="myKeyword" ng-class="{changeBorder : my_form.keyword.$touched && my_form.keyword.$invalid}" placeholder="Enter Artist, Team or Event Name (eg. Lakers)" ng-required="true"  ng-keyup="complete(myKeyword)" >
+
+
+                        <ul class="list-group" ng-hide="autoHide">
+                            <li class="list-group-item" ng-repeat="data in autoTable"
+                                ng-click="getAuto(data)">
+                                {{ data }}
+                            </li>
+                        </ul>
+
+                        <span style="color:red" ng-show="my_form.keyword.$touched && my_form.keyword.$invalid"> Please enter a keyword</span>
+                    </div>
+                </div>
+
+                <div class="form-group row " >
+                    <label for="form_category" class="labels col-md-3 ">Category</label>
+                    <div class="col-md-4" ng-init="myCategory='all'">
+                        <select id="form_category" name="category" class="form-control" ng-model="myCategory" required="required">
+                            <option value="all">All</option>
+                            <option value="music">Music</option>
+                            <option value="sports">Sports</option>
+                            <option value="arts">Arts & Theatre</option>
+                            <option value="film">Film</option>
+                            <option value="miscellaneous">Miscellaneous</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row ">
+                    <label for="form_distance" class="labels col-md-3">Distance</label>
+                    <div class="col-md-4" ng-init="myDistance = 10">
+                        <input type="text" id="form_distance" name="distance"  class="form-control" ng-model="myDistance" placeholder="10" pattern="[0-9]+">
+                    </div>
+
+
+                    <div class="col-md-4" ng-init="form_mile='miles'">
+                        <select id="form_mile" name="mile" class="form-control" required>
+                            <option value="miles">Miles</option>
+                            <option value="kilometers">Kilometers</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-group row" >
+                    <label for="input_location" class="labels col-md-3">From<span class="star" style="color: red">*<span></label>
+                    <div class="col-md-9" ng-init="myLocation='cur_location'" >
+                        <input type="radio" id="location_opt1" name="curLocation" value="cur_location" ng-model="myLocation" ng-checked="1" ng-click="curLoc()"> Current location<br>
+                        <input type="radio" id="location_opt2" name="location" value="other_location" ng-model="myLocation" ng-click="readLoc();"> Other. Please specify:<br>
+                        <input type="text" id="input_location" ng-class="{changeBorder:  myLocation=='other_location' && ( my_form.input_location.$touched && my_form.input_location.$invalid) }" name="input_location" class="form-control" ng-model="inputLocation" ng-required="true" placeholder="Enter a location" disabled>
+                        <span id="location_warn" style="color:red" ng-show=" myLocation=='other_location' && (my_form.input_location.$touched && my_form.input_location.$invalid) "> Please enter a location</span>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button type="submit" id="searchBtn" ng-disabled=" (my_form.input_location.$invalid && myLocation=='other_location') || my_form.keyword.$invalid ||(my_form.keyword.$touched && my_form.keyword.$invalid) || (myLocation=='other_location' && (my_form.input_location.$touched && my_form.input_location.$invalid ))" class="btn btn-primary" name="search" >
+                            <i class="fas fa-search"></i> Search</button>
+                        <button type="button" id="clearBtn" ng-click="clearAll()" class="btn btn-outline-dark" name="clear" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 24 24"><path d="M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"/><path d="M0 0h24v24H0z" fill="none"/></svg>Clear</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" id="rstBtn">
+    <div class="form-group">
+        <div class="col-md-12">
+            <center>
+                <button type="button" id="resultsBtn" class="btn btn-outline-primary btn-md" name="results" ng-class="{active : activeResult}" ng-click="inFav = false; showFavT = false; activeFav = false; showFirstTable = true; clickList = true ; activeResult = true" autofocus>Results</button>
+                <button type="button" id="favoritesBtn" class="btn btn-outline-primary btn-md" name="favorites" ng-class="{active : activeFav}" ng-click=" inFav = true; clickList = false; clickLeft = false; showDetailTable = false; showFirstTable = false; activeResult = false; activeFav = true; showFavT = true; showFav(); ">Favorites</button>
+            </center>
+        </div>
+    </div>
+
+    <div id="firstRst" ng-show="showFirstTable" ng-class="{slideRight : clickList}">
+
+        <div id="detailBtn" >
+            <button ng-click="clickList = false; showFirstTable = false; clickLeft = true; showDetailTable = true; " type="button" class="btn btn-outline-secondary" style="float: right; margin-bottom: 10px; margin-top: 10px" ng-disabled="!clickList" >
+                Details
+                <i class="fas fa-angle-right">
+                </i>
+            </button>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Event</th>
+                <th scope="col">Category</th>
+                <th scope="col">Venue Info</th>
+                <th scope="col">Favorite</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in firstTable | orderBy : 'dates.start.localDate'"  id="{{ x.id }}_event">
+                <th scope="row">{{ $index + 1 }}</th>
+                <td>{{ x.dates.start.localDate }}</td>
+                <td >
+                    <a href="###" ng-click="getDetail(x.id, x.name, x)" data-toggle="tooltip" title="{{x.name }}">
+                        {{ x.name | truncate }}
+                    </a>
+                </td>
+                <td>{{ x.classifications[0].genre.name}} - {{x.classifications[0].segment.name}}</td>
+                <td>{{ x._embedded.venues[0].name }}</td>
+                <td>
+
+                    <div  id="favBtn" style=" border-radius: 4px; border-width: 2px;border-style: solid ;border-color: #c1c1c1; background-color: white; height: 34px; width: 46px">
+                        <i id="{{ x.id }}"  ng-click=" this.blur(); handleFav(x)" class="far fa-star" style="padding: 7px 14px" ></i>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!--warning no rst-->
+    <div  class="container">
+        <br /><br />
+        <div class="alert alert-warning" ng-show="!hasRst" role="alert">
+            No records
+        </div>
+    </div>
+
+    <div class="progress" ng-show="showProgress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+    </div>
+
+
+    <div ng-show="showDetailTable"  ng-class="{slideLeft : clickLeft}" >
+        <h2 style="text-align: center">{{ event_name }}</h2>
+        <div class="row " style="margin: 10px">
+            <button type="button" ng-click="  handleList() " class="btn btn-outline-secondary" style="float: left; margin-left: 20px; padding-left: 15px" >
+                <i class="fas fa-angle-left">
+                </i>
+                List
+            </button>
+
+            <div id="rightBtn" >
+                <!--favorite star-->
+                <div  id="favbutton" style=" float:right; margin-left: 10px; border-radius: 4px; border-width: 2px;border-style: solid ;border-color: #c1c1c1; background-color: white; height: 44px; width: 56px">
+                    <i id="processStar"  ng-click="this.blur(); addFav(event_name)" class="far fa-star" style="padding: 11px 16px" ></i>
+                </div>
+
+                <!--twitter-->
+                <a style="float: right" target="_blank" class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check out {{event_name}} located at {{event_venue}}. Website: {{event_url}} %23CSCI571EventSearch">
+                    <img src="http://csci571.com/hw/hw8/Images/Twitter.png" style="width: 50px; height: 44px">
+                </a>
+
+
+            </div>
+        </div>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist" style="float: right">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Event</a>
+                <a ng-click="showArtist()" class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Artist/Teams</a>
+                <a ng-click="showVenue()" class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Venue</a>
+                <a class="nav-item nav-link" id="nav-upcoming-tab" data-toggle="tab" href="#nav-upcoming" role="tab" aria-controls="nav-upcoming" aria-selected="false">UpcomingEvents</a>
+            </div>
+        </nav>
+
+        <div class="tab-content" id="nav-tabContent">
+            <!-- sub table 1-->
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                <!--corner case-->
+                <div class="container">
+                    <br /><br />
+                    <div class="alert alert-warning" ng-show=" !hasEvent" role="alert">
+                        No records
+                    </div>
+                </div>
+
+                <table class="table table-striped" id="allEvent">
+                    <tbody>
+                    <tr ng-show="has_art">
+                        <th scope="row">Artist/Team(s)</th>
+                        <td>{{ event_art }}</td>
+                    </tr>
+
+                    <tr ng-show="has_venue">
+                        <th scope="row">Venue</th>
+                        <td>{{ event_venue }}</td>
+                    </tr>
+
+                    <tr ng-show="has_time">
+                        <th scope="row">Time</th>
+                        <td>{{ event_time | date:"MMM d, y  HH:mm:ss"}}</td>
+                    </tr>
+
+                    <tr ng-show="has_category">
+                        <th scope="row">Category</th>
+                        <td>{{ event_category }}</td>
+                    </tr>
+
+                    <tr ng-show="has_price">
+                        <th scope="row">Price Range</th>
+                        <td>{{ event_price}}</td>
+                    </tr>
+
+                    <tr ng-show="has_ticket">
+                        <th scope="row">Ticket Status</th>
+                        <td>{{ event_ticket}}</td>
+                    </tr>
+
+                    <tr ng-show="has_buy">
+                        <th scope="row">Buy Ticket At</th>
+                        <td><a target='_blank' href="{{event_buy}}" >Ticketmaster</a></td>
+                    </tr>
+
+                    <tr ng-show="has_seat">
+                        <th scope="row">Seat Map</th>
+                        <td>
+                            <a target='_blank' href="###" ng-click="showPic = 1" data-toggle="modal" data-target="#exampleModal" >View Seat Map Here</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">View Seat Map</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <a href="{{ event_seat }}" target="_blank">
+                                                <img src="{{ event_seat }}" style="width: 100%">
+                                            </a>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- sub table 2-->
+            <div class="tab-pane fade" style="float: left" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <!--corner case-->
+                <div class="container">
+                    <br /><br />
+                    <div id="teamWarn" class="alert alert-warning" ng-show=" !hasTeam" role="alert">
+                        No records
+                    </div>
+                </div>
+
+                <div class="container" id="artistArea">
+
+                </div>
+
+
+            </div>
+            <!-- sub table 3-->
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <!--corner case-->
+                <div class="container">
+                    <br /><br />
+                    <div class="alert alert-warning" ng-show=" !hasVenue" role="alert">
+                        No records
+                    </div>
+                </div>
+
+                <div class="container" id="allVenue">
+                    <table id="venueTable" class="table table-striped">
+                        <tbody>
+
+                        <div id="subVenue">
+                            {{ venue_name }}
+                        </div>
+                        <tr>
+                            <th scope="row">Address</th>
+                            <td>{{ venue_add }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">City</th>
+                            <td>{{ venue_city }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Phone Number</th>
+                            <td>{{ venue_phone }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Open Hours</th>
+                            <td>{{ venue_hour }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">General Rule</th>
+                            <td>{{ venue_rule }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Child Rule</th>
+                            <td>{{ venue_child }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                     <!--display venue map -->
+                    <div id="map"></div>
+                </div>
+            </div>
+            <!-- sub table 4-->
+            <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
+                <!--corner case-->
+                <div class="container">
+                    <br /><br />
+                    <div class="alert alert-warning" ng-show="!hasComing" role="alert">
+                        No records
+                    </div>
+                </div>
+
+                <div class="container" id="allUpcoming">
+
+                    <div class="row" style="position: relative; left: 9%;top: 68px;">
+                        <select ng-init="sort_by = 'default'" ng-model="sort_by">
+                            <option value="default">Default</option>
+                            <option value="displayName">Event Name</option>
+                            <option value="start.date">Time</option>
+                            <option value="performance[0].displayName">Artist</option>
+                            <option value="type">Type</option>
+                        </select>
+                        &nbsp;
+                        <select ng-init="sort_expression = '' " ng-model="reverse" ng-disabled="sort_by == 'default'">
+                            <option value="">Ascending</option>
+                            <option value="1">Descending</option>
+                        </select>
+                    </div>
+
+                    <div class="card" ng-repeat="x in upcomingEventTable | limitTo : limitLen |orderBy : sort_by  : reverse : reverse  "  style="position: relative; left: 2%;top: 76px;width: 94%; margin: 15px">
+
+                        <div class="card-body" >
+                            <div class="row">
+                                <a target="_blank" href="{{ x.uri }}">{{x.displayName}}</a>
+                            </div>
+                            <div class="row">
+                                <div style="color: coral">Artists: {{x.performance[0].displayName}}</div>&nbsp
+                                <div style="color: dimgray">{{x.start.date | date: "MMM d, y" }}</div>&nbsp
+                                <div style="color: dimgray">  {{x.start.time | date:" HH:mm:ss"}}</div>
+                            </div>
+                            <div class="row">
+                               Type: {{x.type}}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button id="showLessBtn" class="btn btn-primary" ng-show="showLess" ng-click="showMore = true; showLess = false; limitLen = 5" ng-hide="showMore">
+                        Show Less
+                    </button>
+
+                    <button id="showMoreBtn" class="btn btn-primary" ng-click="showLess = true; showMore = false; limitLen = 'x.length' " ng-hide="showLess" ng-show="showMore">
+                        Show More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" ng-show="showFavT " >
+
+    <div class="container">
+        <div class="alert alert-warning" ng-show=" Favempty" role="alert">
+            No records
+        </div>
+    </div>
+
+
+
+    <div  ng-show="!Favempty">
+        <button type="button" id="detailFav" ng-disabled="!FavList" ng-click=" clickFavDetail(); clickList = false; showFirstTable = false; " class="btn btn-outline-secondary" style="float: right;position: relative; bottom: 57px;"  >
+            Details
+            <i class="fas fa-angle-right">
+            </i>
+        </button>
+    </div>
+
+    <div class="container" ng-show="hasFav" id="tableFav" ng-class="{ slideRight : rightFav }">
+        <table class="table table-hover" style="width: 93%; margin: 0 auto;">
+
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Event</th>
+                <th scope="col">Category</th>
+                <th scope="col">Venue Info</th>
+                <th scope="col">Favorite</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="(id, e) in Favstorage" id="{{ e.id }}_fav">
+                <th scope="row">{{ $index + 1 }}</th>
+                <td>{{e.dates.start.localDate}}</td>
+                <td><a href="###" ng-click="getDetail(e.id, e.name, e)" >{{e.name}}</a></td>
+                <td>{{e.classifications[0].genre.name}}</td>
+                <td>{{e._embedded.venues[0].name}}</td>
+                <td>
+                    <div style=" border-radius: 4px; border-width: 2px;border-style: solid ;border-color: #c1c1c1; background-color: white; height: 38px; width: 50px">
+                        <i  class="fas fa-trash-alt" ng-click="removeFav(e)" style="position: relative; top: 6px; left: 40%;"></i>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- -->
+<div ng-show="Error" style="text-align: center">
+    <br /><br />
+    <p class="alert alert-danger"> Failed to get search results.</p>
+</div>
+
+
+</body>
+</html>
