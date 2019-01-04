@@ -20,9 +20,10 @@ a website used for searching entertainments
 * Moment.js: for time conversion [link](http://momentjs.com/) 
 * Angular Google Maps: This makes it easier to use Google Maps in Angular [link](https://angular-maps.com/)
 
-### <font color=#D2691E> Deployed on AWS Elastic Beanstalk </font>
+### Deployed on AWS Elastic Beanstalk 
 
 #### Preview
+ <font color=red > red </font>
 ![alt text](/Screen-shots/event%20search%20form.png)
 
 #### AutoComplete search input used AngularCLI
