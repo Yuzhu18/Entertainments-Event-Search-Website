@@ -63,5 +63,3 @@ a website used for searching entertainments
 #### view the favorites form
 ![alt text](/Screen-shots/Favorites%20part.png)
 
-
-
